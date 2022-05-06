@@ -1,0 +1,12 @@
+version: "3.3"
+services:
+  csvserver:
+    image: infracloudio/csvserver:latest
+    ports:
+      - "9393:9300"
+    volumes:
+      - type: bind
+        source: /home/chetan/Documents/coderepo/csvserver/solution/inputFile
+        target: /csvserver/inputdata
+    environment:
+      CSVSERVER_BORDER: Orange

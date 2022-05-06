@@ -51,11 +51,33 @@ chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ docker stop 
 chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ docker run -itd --name csvserver-docker --env CSVSERVER_BORDER=Orange -p 9393:${PORT} --mount type=bind,source=${INPUTFILE},target=/csvserver/inputdata infracloudio/csvserver:latest
 bccdf155738eca1ea7c86458d4d75c6dce191ebd43864a622420947f406fca5c
 
-chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ CONTAINER=$(docker ps | awk '/csvserver-docker/ {print $1}')
 ```
 
 ### UI would open fine with given [10] entries and 'Orange' border on => http://localhost:9393/
 
 
 
+## Part II
+```
+## Delete containers running in Part I
+docker stop ${CONTAINER} && docker rm ${CONTAINER}
+
+## Run using docker-compose
+## Use Ctrl+C to shut.
+## Either "docker-compose up -d" to run in background
+
+chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ docker-compose up
+Creating network "solution_default" with the default driver
+Creating solution_csvserver_1 ... done
+Attaching to solution_csvserver_1
+csvserver_1  | 2022/05/06 15:06:39 listening on ****
+csvserver_1  | 2022/05/06 15:06:40 wrote 653 bytes for /
+csvserver_1  | 2022/05/06 15:06:40 wrote 653 bytes for /favicon.ico
+csvserver_1  | 2022/05/06 15:06:51 wrote 653 bytes for /
+csvserver_1  | 2022/05/06 15:06:51 wrote 653 bytes for /favicon.ico
+csvserver_1  | 2022/05/06 15:06:53 wrote 653 bytes for /
+csvserver_1  | 2022/05/06 15:06:53 wrote 653 bytes for /favicon.ico
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping solution_csvserver_1 ... done
+```
 
