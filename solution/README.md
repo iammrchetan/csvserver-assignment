@@ -81,3 +81,51 @@ csvserver_1  | 2022/05/06 15:06:53 wrote 653 bytes for /favicon.ico
 Stopping solution_csvserver_1 ... done
 ```
 
+## Part III
+```
+## Remove old containers
+docker-compose down
+
+## Run docker-compose yaml after adding prometheus configuration
+docker-compose up -d
+```
+
+### Get prometheus.yml either online or from container from trail run
+### Location: /etc/prometheus/prometheus.yml
+### Add "csvserver:9300" as target in prometheus.yml
+### This is where prometheus will get the metrics from app container.
+
+```
+## Now run docker-compose to run both containers
+## i.) csvserver ii.) prometheus
+chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ docker-compose up -d
+solution_csvserver_1 is up-to-date
+Creating solution_prometheus_1 ... done
+```
+
+### Now you can see the running containers using docker
+```
+chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ docker ps
+CONTAINER ID   IMAGE                           COMMAND                  CREATED          STATUS          PORTS                    NAMES
+bcb0363872e1   prom/prometheus:v2.22.0         "/bin/prometheus --c…"   53 seconds ago   Up 51 seconds   0.0.0.0:9090->9090/tcp   solution_prometheus_1
+12d59c9c644b   infracloudio/csvserver:latest   "/csvserver/csvserver"   21 minutes ago   Up 21 minutes   0.0.0.0:9393->9300/tcp   solution_csvserver_1
+```
+
+### CSVSERVER => http://localhost:9393/
+### PROMETHEUS => http://localhost:9090/
+### Both running fine.
+### query = csvserver_records and 'Execute' on PROMETHEUS
+### Under Graph tab, use 10 mins
+### There's a clear horizontal line on 10 as expected 
+### in the tutorial
+
+
+### Destroy
+```
+chetan@99devops:~/Documents/coderepo/csvserver-assignment/solution$ docker-compose down
+Stopping solution_prometheus_1 ... done
+Stopping solution_csvserver_1  ... done
+Removing solution_prometheus_1 ... done
+Removing solution_csvserver_1  ... done
+Removing network solution_default
+```

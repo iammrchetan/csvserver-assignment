@@ -10,3 +10,11 @@ services:
         target: /csvserver/inputdata
     environment:
       CSVSERVER_BORDER: Orange
+  prometheus:
+    image: prom/prometheus:v2.22.0
+    ports:
+      - "9090:9090"
+    volumes:
+      - type: bind
+        source: /home/chetan/Documents/coderepo/csvserver/solution/prometheus.yml
+        target: /etc/prometheus/prometheus.yml
