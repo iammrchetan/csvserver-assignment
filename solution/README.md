@@ -129,3 +129,6 @@ Removing solution_prometheus_1 ... done
 Removing solution_csvserver_1  ... done
 Removing network solution_default
 ```
+
+## Regarding the 'z' option with '-v' mount, I have used '--mount' instead. Tested on vagrant machine (centos7) while selinux is enabled.
+## This works fine!!
