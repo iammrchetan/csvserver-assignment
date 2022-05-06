@@ -1,0 +1,1 @@
+docker run -itd --name csvserver-docker --env CSVSERVER_BORDER=Orange -p 9393:9300 --mount type=bind,source=/home/chetan/Documents/coderepo/csvserver-assignment/solution/inputFile,target=/csvserver/inputdata infracloudio/csvserver:latest
